@@ -4,7 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard @yield('title', 'Admin') - Peminjaman Alat</title>
+    <title>
+        @if (auth()->user()->role->name === 'admin')
+            Admin Dashboard
+        @elseif(auth()->user()->role->name === 'petugas')
+            Petugas Dashboard
+        @elseif(auth()->user()->role->name === 'peminjam')
+            Peminjam Dashboard
+        @endif
+        - Peminjaman Alat
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -16,11 +25,11 @@
             <div class="p-6">
                 <h1 class="text-2xl font-bold flex items-center gap-2">
 
-                    @if (auth()->user()->role->name ==='admin')
+                    @if (auth()->user()->role->name === 'admin')
                         <i class="fas fa-tools"></i> Admin Dashboard
-                    @elseif(auth()->user()->role->name ==='petugas')
+                    @elseif(auth()->user()->role->name === 'petugas')
                         <i class="fas fa-tools"></i> Petugas Dashboard
-                    @elseif(auth()->user()->role->name ==='peminjam')
+                    @elseif(auth()->user()->role->name === 'peminjam')
                         <i class="fas fa-tools"></i> Peminjam Dashboard
                     @endif
                 </h1>

@@ -130,8 +130,8 @@ Route::middleware(['auth', 'role:peminjam'])->prefix('peminjam')->group(function
     Route::post('/borrowings', [BorrowingController::class, 'store'])
         ->name('peminjam.borrowings.store');
 
-    Route::get('/return-tools', [PeminjamController::class, 'returnTool'])
-        ->name('peminjam.return-tools.create');
+    // Route::get('/return-tools', [PeminjamController::class, 'returnTool'])
+    //     ->name('peminjam.return-tools.create');
 
     Route::post('/return-tools/{borrowing}', [PeminjamController::class, 'storeReturnTool'])
         ->name('peminjam.return-tools.store');
