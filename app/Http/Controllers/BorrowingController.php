@@ -34,7 +34,7 @@ class BorrowingController extends Controller
             'return_date' => 'required|date'
         ]);
 
-        $userId = (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) ? $request->user_id : Auth::id();
+        $userId = Auth::id();
         $status = (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) ? $request->status ?? 'menunggu' : 'menunggu';
 
         // Check stock
@@ -54,16 +54,14 @@ class BorrowingController extends Controller
             'status'      => $status
         ]);
 
-        if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2) {
-            return redirect()->route('borrowings.index');
-        }
 
-        return back()->with('success', 'Peminjaman berhasil diajukan!');
+        return redirect()->route('peminjam.borrowings.index')->with('success', 'Peminjaman berhasil diajukan!');
     }
 
     public function approve(Borrowing $borrowing)
     {
         $borrowing->update(['status' => 'dipinjam']);
+
         // Decrease stock
         $borrowing->tool->decrement('stock');
 
@@ -86,10 +84,6 @@ class BorrowingController extends Controller
 
     public function update(Request $request, Borrowing $borrowing)
     {
-        if (Auth::user()->role_id != 1 && Auth::user()->role_id != 2) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $request->validate([
             'tool_id'     => 'required',
             'return_date' => 'required|date'
@@ -109,9 +103,6 @@ class BorrowingController extends Controller
 
     public function destroy(Borrowing $borrowing)
     {
-        if (Auth::user()->role_id != 1 && Auth::user()->role_id != 2) {
-            abort(403, 'Unauthorized action.');
-        }
         $borrowing->delete();
         return back();
     }

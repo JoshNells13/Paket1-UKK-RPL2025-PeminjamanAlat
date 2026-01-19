@@ -17,13 +17,19 @@ class RoleSeeder extends Seeder
         $adminRole    = Role::where('name', 'admin')->first();
 
         User::create([
+            'name'     => 'Peminjam Satu',
+            'username' => 'peminjam1',
+            'password' => Hash::make('password'),
+            'role_id'  => $peminjamRole->id,
+        ]);
+
+        User::create([
             'name'     => 'Petugas Satu',
             'username' => 'petugas1',
             'password' => Hash::make('password'),
             'role_id'  => $petugasRole->id,
         ]);
 
-        // 3 ADMIN
         User::create([
             'name'     => 'Admin Satu',
             'username' => 'admin1',

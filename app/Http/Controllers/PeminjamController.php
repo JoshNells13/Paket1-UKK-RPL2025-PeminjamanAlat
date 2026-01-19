@@ -15,7 +15,7 @@ class PeminjamController extends Controller
 
         $Tool = Tool::all();
 
-        return view('Peminjam.Tool.index',compact('Tool'));
+        return view('Peminjam.Tool.index', compact('Tool'));
     }
 
     public function Borrowing()
@@ -84,4 +84,32 @@ class PeminjamController extends Controller
     {
         return view('Peminjam.Return.create');
     }
+
+  public function storeReturnTool(Request $request, Borrowing $borrowing)
+{
+    $request->validate([
+        'returned_at' => 'required|date',
+        'fine'        => 'nullable|numeric',
+        'note'        => 'nullable|string',
+    ]);
+
+    // Update borrowing status
+    $borrowing->update(['status' => 'dikembalikan']);
+
+    // Tambah stok alat
+    $borrowing->tool->increment('stock');
+
+    // Simpan data pengembalian
+    ReturnTool::create([
+        'borrowing_id' => $borrowing->id,
+        'returned_at'  => $request->returned_at,
+        'fine'         => 1,
+        'note'         => $request->note,
+    ]);
+
+    return redirect()
+        ->route('petugas.borrowings.index')
+        ->with('success', 'Pengembalian alat berhasil diproses!');
+}
+
 }

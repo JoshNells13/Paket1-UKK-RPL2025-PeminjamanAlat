@@ -6,7 +6,7 @@
 <div class="mt-4 mb-2 text-xs text-blue-200 uppercase font-semibold pl-4">Master Data</div>
 <a href="{{ route('users.index') }}" class="flex items-center gap-3 px-4 py-3 {{ request()->routeIs('users.*') ? 'bg-blue-700' : 'hover:bg-blue-600' }} rounded-lg transition">
     <i class="fas fa-users"></i>
-    <span>Data User</span>
+    <span>Data Pengguna</span>
 </a>
 <a href="{{ route('categories.index') }}" class="flex items-center gap-3 px-4 py-3 {{ request()->routeIs('categories.*') ? 'bg-blue-700' : 'hover:bg-blue-600' }} rounded-lg transition">
     <i class="fas fa-tags"></i>

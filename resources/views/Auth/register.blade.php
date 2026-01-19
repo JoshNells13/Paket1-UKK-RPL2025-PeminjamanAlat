@@ -53,7 +53,7 @@
         <p class="text-center mt-6 text-gray-600">
             Sudah punya akun?
             <a href="{{ route('login.show') }}" class="text-blue-600 font-bold hover:text-blue-700 underline">
-                Login di sini
+                Masuk di sini
             </a>
         </p>
     </div>

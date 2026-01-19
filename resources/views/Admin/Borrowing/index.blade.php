@@ -56,6 +56,21 @@
                                 <i class="fas fa-undo"></i>
                             </a>
                         @endif
+
+                        <a href="{{ route(auth()->user()->role->name . '.borrowings.edit', $item) }}"
+                           class="text-blue-600 hover:text-blue-800" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <form action="{{ route(auth()->user()->role->name . '.borrowings.destroy', $item) }}"
+                              method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button onclick="return confirm('Hapus data peminjaman ini?')"
+                                    class="text-red-600 hover:text-red-800" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

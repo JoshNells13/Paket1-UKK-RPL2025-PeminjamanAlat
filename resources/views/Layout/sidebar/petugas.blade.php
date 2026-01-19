@@ -8,3 +8,10 @@
     <i class="fas fa-clipboard-list"></i>
     <span>Data Peminjaman</span>
 </a>
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-600 rounded-lg transition w-full text-left">
+        <i class="fas fa-file-alt"></i>
+        <span>Keluar</span>
+    </button>
+</form>

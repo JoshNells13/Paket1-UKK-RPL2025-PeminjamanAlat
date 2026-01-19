@@ -14,6 +14,9 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ReportController;
 
 
+Route::get('/',[AuthController::class, 'showLogin'])
+    ->name('home')
+    ->middleware('guest');
 
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login.show')
@@ -97,6 +100,12 @@ Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->group(function (
     Route::get('/borrowings', [PetugasController::class, 'index'])
         ->name('petugas.borrowings.index');
 
+    Route::get('/return-tools/{borrowing}', [PetugasController::class, 'returnTool'])
+        ->name('petugas.return-tools.create');
+
+    Route::post('/return-tools', [PetugasController::class, 'storeReturnTool'])
+        ->name('petugas.return-tools.store');
+
     Route::patch('/borrowings/{borrowing}/approve', [PetugasController::class, 'approve'])
         ->name('petugas.borrowings.approve');
 
@@ -124,6 +133,6 @@ Route::middleware(['auth', 'role:peminjam'])->prefix('peminjam')->group(function
     Route::get('/return-tools', [PeminjamController::class, 'returnTool'])
         ->name('peminjam.return-tools.create');
 
-    Route::post('/return-tools', [ReturnController::class, 'store'])
+    Route::post('/return-tools/{borrowing}', [PeminjamController::class, 'storeReturnTool'])
         ->name('peminjam.return-tools.store');
 });
