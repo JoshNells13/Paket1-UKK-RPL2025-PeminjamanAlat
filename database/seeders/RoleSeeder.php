@@ -12,6 +12,12 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
 
+        Role::create(['name' => 'peminjam']);
+        Role::create(['name' => 'petugas']);
+        Role::create(['name' => 'admin']);
+
+
+
         $peminjamRole = Role::where('name', 'peminjam')->first();
         $petugasRole  = Role::where('name', 'petugas')->first();
         $adminRole    = Role::where('name', 'admin')->first();
