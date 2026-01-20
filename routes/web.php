@@ -14,7 +14,7 @@ use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ReportController;
 
 
-Route::get('/',[AuthController::class, 'showLogin'])
+Route::get('/', [AuthController::class, 'showLogin'])
     ->name('home')
     ->middleware('guest');
 
@@ -63,7 +63,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
 
     Route::resource('/return-tools', ReturnController::class)
-        ->names('admin.return-tools');
+        ->names('admin.return-tools')->except('create','show','store');
+
+    Route::get('/return-tools/{borrowing}', [ReturnController::class, 'create'])
+        ->name('admin.return-tools.create');
+
+    Route::post('/return-tools/{borrowing}', [ReturnController::class, 'store'])
+        ->name('admin.return-tools.store');
+
+
 
     Route::resource('/activity-logs', ActivityLogController::class)
         ->only(['index'])
@@ -75,12 +83,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         [BorrowingController::class, 'approve']
     )->name('admin.borrowings.approve');
 
-
     Route::get('/reports', [ReportController::class, 'index'])
         ->name('admin.reports');
-
-
-
 
     Route::get('/activities', [ActivityLogController::class, 'index'])
         ->name('activities.index');
@@ -108,7 +112,6 @@ Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->group(function (
 
     Route::patch('/borrowings/{borrowing}/approve', [PetugasController::class, 'approve'])
         ->name('petugas.borrowings.approve');
-
 });
 
 
@@ -130,8 +133,8 @@ Route::middleware(['auth', 'role:peminjam'])->prefix('peminjam')->group(function
     Route::post('/borrowings', [BorrowingController::class, 'store'])
         ->name('peminjam.borrowings.store');
 
-    // Route::get('/return-tools', [PeminjamController::class, 'returnTool'])
-    //     ->name('peminjam.return-tools.create');
+    Route::get('/return-tools', [PeminjamController::class, 'returnTool'])
+        ->name('peminjam.return-tools.index');
 
     Route::post('/return-tools/{borrowing}', [PeminjamController::class, 'storeReturnTool'])
         ->name('peminjam.return-tools.store');

@@ -55,7 +55,7 @@ class BorrowingController extends Controller
         ]);
 
 
-        return redirect()->route('peminjam.borrowings.index')->with('success', 'Peminjaman berhasil diajukan!');
+        return redirect()->route('admin.borrowings.index')->with('success', 'Peminjaman berhasil diajukan!');
     }
 
     public function approve(Borrowing $borrowing)
@@ -71,14 +71,12 @@ class BorrowingController extends Controller
 
     public function edit(Borrowing $borrowing)
     {
-        if (Auth::user()->role_id != 1 && Auth::user()->role_id != 2) {
-            abort(403, 'Unauthorized action.');
-        }
+
 
         return view('Admin.Borrowing.edit', [
             'borrowing' => $borrowing,
             'tools' => Tool::all(),
-            'users' => \App\Models\User::where('role_id', 3)->get()
+            'users' => User::where('role_id', 3)->get()
         ]);
     }
 

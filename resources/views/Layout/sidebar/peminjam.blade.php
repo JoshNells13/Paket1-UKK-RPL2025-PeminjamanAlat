@@ -15,15 +15,14 @@
     <i class="fas fa-history"></i>
     <span>Riwayat Peminjaman</span>
 </a>
-<a href="{{ route('peminjam.return-tools.create') }}"
+<a href="{{ route('peminjam.return-tools.index') }}"
     class="flex items-center gap-3 px-4 py-3 {{ request()->routeIs('peminjam.return-tools.*') ? 'bg-blue-700' : 'hover:bg-blue-600' }} rounded-lg transition">
     <i class="fas fa-undo"></i>
     <span>Riwayat Pengembalian</span>
 </a>
 <form action="{{ route('logout') }}" method="POST">
     @csrf
-    <button type="submit"
-        class="flex items-center gap-3 px-4 py-3 hover:bg-blue-600 rounded-lg transition w-full text-left">
+    <button type="submit" onclick="return confirm('Ingin Keluar?')" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-600 rounded-lg transition w-full text-left">
         <i class="fas fa-file-alt"></i>
         <span>Keluar</span>
     </button>

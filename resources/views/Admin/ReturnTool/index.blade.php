@@ -31,7 +31,6 @@
                     <td class="px-6 py-4 text-center">{{ $item->returned_at }}</td>
                     <td class="px-6 py-4 text-center">Rp {{ number_format($item->fine, 0, ',', '.') }}</td>
                     <td class="px-6 py-4 text-center space-x-2">
-                    <td class="px-6 py-4 text-center space-x-2">
                         <a href="{{ route(auth()->user()->role->name . '.return-tools.edit', $item) }}"
                            class="text-blue-600 hover:text-blue-800" title="Edit">
                             <i class="fas fa-edit"></i>

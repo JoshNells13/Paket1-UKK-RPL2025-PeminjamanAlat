@@ -15,6 +15,7 @@ class DashboardController extends Controller
         // Total alat
         $totalAlat = Tool::count();
 
+
         // Alat sedang dipinjam
         $alatDipinjam = Borrowing::where('status', 'dipinjam')->count();
 
@@ -40,6 +41,17 @@ class DashboardController extends Controller
         //Total Alat Rusak dan Hilang
         $alatRusakHilang = ReturnTool::whereIn('fine', [0])->count();
 
+        //Total Peminjaman Alat Yang Sedang Diproses
+
+        $peminjamDiProses = Borrowing::whereIn('status',['menunggu'])->count();
+
+        if ($totalStokAlat > 0) {
+            $alatTersedia = max(0, $totalStokAlat - $alatDipinjam);
+            $persentaseAlatTersedia = round(($alatTersedia / $totalStokAlat) * 100, 2);
+        } else {
+            $persentaseAlatTersedia = 0;
+        }
+
 
 
         return view('Admin.index', compact(
@@ -49,7 +61,9 @@ class DashboardController extends Controller
             'keterlambatan',
             'peminjamanTerbaru',
             'totalStokAlat',
-            'alatRusakHilang'
+            'alatRusakHilang',
+            'persentaseAlatTersedia',
+            'peminjamDiProses'
         ));
     }
 

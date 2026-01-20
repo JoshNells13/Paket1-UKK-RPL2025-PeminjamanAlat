@@ -7,13 +7,23 @@
             <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-gray-500 text-sm">Total Alat</p>
+                        <p class="text-gray-500 text-sm">Total Jenis Alat</p>
                         <p class="text-3xl font-bold text-blue-900">{{ $totalAlat }}</p>
 
                     </div>
                     <i class="fas fa-boxes text-3xl text-blue-300"></i>
                 </div>
 
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-500 text-sm">Total Stok Alat</p>
+                        <p class="text-3xl font-bold text-blue-900">{{ $totalStokAlat }}</p>
+
+                    </div>
+                    <i class="fas fa-boxes text-3xl text-blue-300"></i>
+                </div>
             </div>
 
             <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-400">
@@ -35,7 +45,15 @@
                     </div>
                     <i class="fas fa-users text-3xl text-blue-300"></i>
                 </div>
-
+            </div>
+            <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-600">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-500 text-sm">Peminjaman Yang Di Proses/Menunggu</p>
+                        <p class="text-3xl font-bold text-yellow-900">{{ $peminjamDiProses }}</p>
+                    </div>
+                    <i class="fas fa-users text-3xl text-blue-300"></i>
+                </div>
             </div>
 
             <div class="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
@@ -53,7 +71,7 @@
         <!-- Charts Section -->
         <div class="grid grid-cols-2 gap-6 mb-8">
             <!-- Chart 1 -->
-            <div class="bg-white rounded-lg shadow p-6">
+            {{-- <div class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Peminjaman Per Bulan</h3>
                 <div class="h-64 flex items-end gap-2 justify-around px-4">
                     <div class="flex flex-col items-center gap-2">
@@ -81,7 +99,7 @@
                         <span class="text-xs text-gray-600">Jun</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Chart 2 -->
             <div class="bg-white rounded-lg shadow p-6">
@@ -90,7 +108,7 @@
                     <div class="text-center">
                         <div
                             class="w-24 h-24 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-2xl mx-auto mb-2">
-                            73%
+                            {{ $persentaseAlatTersedia }}%
                         </div>
                         <p class="text-sm text-gray-600">Tersedia</p>
                     </div>
@@ -131,8 +149,6 @@
                                 Peminjaman</th>
                             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
                                 Status</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Aksi
-                            </th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
@@ -156,11 +172,6 @@
                                         <span
                                             class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold">Menunggu</span>
                                     @endif
-                                </td>
-                                <td class="px-6 py-4 text-sm space-x-2">
-                                    <a href="#" class="text-blue-600 hover:text-blue-800">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
                                 </td>
                             </tr>
                         @empty
